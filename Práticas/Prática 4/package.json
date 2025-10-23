@@ -1,16 +1,19 @@
 {
   "name": "pratica04",
   "version": "1.0.0",
-  "description": "",
+  "description": "Projeto backend conectado ao MongoDB Atlas",
   "main": "index.js",
+  "type": "module",
   "scripts": {
+    "start": "node index.js",
     "dev": "nodemon index.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Rafael Ferreira de Resende",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.21.2"
+    "express": "^4.21.2",
+    "mongodb": "^6.9.0"
   },
   "devDependencies": {
     "nodemon": "^3.1.10"
