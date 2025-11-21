@@ -1,0 +1,91 @@
+openapi: 3.0.0
+info:
+  title: Minha API REST
+  version: 0.1
+
+servers:
+  - url: http://localhost:3000/
+
+tags:
+  - name: usuarios
+
+paths:
+
+  /usuarios:
+    post:
+      tags:
+        - usuarios
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email, senha]
+              properties:
+                email:
+                  type: string
+                senha:
+                  type: string
+      responses:
+        201:
+          description: Usuário criado
+        422:
+          description: Dados inválidos
+
+  /usuarios/login:
+    post:
+      tags:
+        - usuarios
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [usuario, senha]
+              properties:
+                usuario:
+                  type: string
+                senha:
+                  type: string
+      responses:
+        200:
+          description: Login OK
+        401:
+          description: Credenciais inválidas
+
+  /usuarios/renovar:
+    post:
+      tags:
+        - usuarios
+      security:
+        - JWTAuth: []
+      responses:
+        200:
+          description: Token renovado
+        401:
+          description: Token inválido
+
+  /usuarios/{id}:
+    delete:
+      tags:
+        - usuarios
+      security:
+        - JWTAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        204:
+          description: Removido com sucesso
+
+components:
+  securitySchemes:
+    JWTAuth:
+      type: apiKey
+      in: header
+      name: authorization
